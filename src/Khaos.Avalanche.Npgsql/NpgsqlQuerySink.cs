@@ -2,7 +2,7 @@ using Dapper;
 
 using Npgsql;
 
-namespace Khaos.Avalanche;
+namespace Khaos.Avalanche.Npgsql;
 
 public class NpgsqlQuerySink : Sink<object>
 {

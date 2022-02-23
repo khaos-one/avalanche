@@ -2,7 +2,7 @@ using Google.Cloud.BigQuery.V2;
 
 using Polly;
 
-namespace Khaos.Avalanche;
+namespace Khaos.Avalanche.BigQuery;
 
 public class BigQueryBulkTableSink : ISink<IEnumerable<BigQueryInsertRow>>
 {

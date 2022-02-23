@@ -2,7 +2,7 @@ using System.Runtime.CompilerServices;
 
 using Google.Cloud.BigQuery.V2;
 
-namespace Khaos.Avalanche;
+namespace Khaos.Avalanche.BigQuery;
 
 public class BigQuerySource : Source<BigQueryRow>
 {

@@ -8,12 +8,9 @@
 
     <ItemGroup>
       <PackageReference Include="Csv" Version="2.0.65" />
-      <PackageReference Include="Dapper" Version="2.0.123" />
-      <PackageReference Include="Google.Cloud.BigQuery.V2" Version="2.3.0" />
       <PackageReference Include="Google.Cloud.Storage.V1" Version="3.7.0" />
       <PackageReference Include="Lokad.ILPack" Version="0.1.7" />
       <PackageReference Include="Microsoft.Toolkit.HighPerformance" Version="7.1.2" />
-      <PackageReference Include="Npgsql" Version="6.0.3" />
       <PackageReference Include="Polly" Version="7.2.3" />
       <PackageReference Include="System.Linq.Async" Version="6.0.1" />
       <PackageReference Include="Terminal.Gui" Version="1.4.0" />
