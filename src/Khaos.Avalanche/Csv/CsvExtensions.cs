@@ -1,6 +1,6 @@
 using Csv;
 
-namespace Khaos.Avalanche;
+namespace Khaos.Avalanche.Csv;
 
 public static class CsvExtensions
 {

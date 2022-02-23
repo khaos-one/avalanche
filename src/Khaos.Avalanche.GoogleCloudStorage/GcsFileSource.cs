@@ -2,7 +2,7 @@ using System.Runtime.CompilerServices;
 
 using Google.Cloud.Storage.V1;
 
-namespace Khaos.Avalanche;
+namespace Khaos.Avalanche.GoogleCloudStorage;
 
 public class GcsFileSource : Source<FileContent>
 {

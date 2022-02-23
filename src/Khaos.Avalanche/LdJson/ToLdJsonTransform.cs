@@ -1,9 +1,9 @@
-using Newtonsoft.Json;
+using System.Text.Json;
 
-namespace Khaos.Avalanche;
+namespace Khaos.Avalanche.LdJson;
 
 public class ToLdJsonTransform<T> : ITransform<T, string>
 {
     public IAsyncEnumerable<string> Expand(IAsyncEnumerable<T> enumerable) =>
-        enumerable.Select(element => JsonConvert.SerializeObject(element));
+        enumerable.Select(element => JsonSerializer.Serialize(element));
 }

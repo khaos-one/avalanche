@@ -2,7 +2,7 @@ using System.Text;
 
 using Csv;
 
-namespace Khaos.Avalanche;
+namespace Khaos.Avalanche.Csv;
 
 public class FromCsvFileTransform : ITransform<FileContent, IEnumerable<ICsvLine>>
 {

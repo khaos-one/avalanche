@@ -1,6 +1,6 @@
 using Csv;
 
-namespace Khaos.Avalanche;
+namespace Khaos.Avalanche.Csv;
 
 public class ToCsvFileTransform : ITransform<string[], string>
 {
