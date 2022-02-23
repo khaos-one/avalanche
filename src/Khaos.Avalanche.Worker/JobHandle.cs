@@ -1,7 +1,7 @@
 using System.Reflection;
 using System.Runtime.Loader;
 
-using Khaos.Avalanche.Remoting;
+using Khaos.Avalanche.Hosting;
 
 namespace Khaos.Avalanche.Worker;
 

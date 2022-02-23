@@ -27,7 +27,9 @@ public class JobsDispatcher
     }
 
     public IReadOnlyDictionary<Guid, JobStatus> GetStatuses() =>
-        _jobs.ToImmutableDictionary(x => x.Key, x => new JobStatus(x.Value.Status, x.Value.Exception?.Message));
+        _jobs.ToImmutableDictionary(
+            x => x.Key,
+            x => new JobStatus(x.Value.Status, x.Value.Exception?.Message));
 
     private void CheckJobs(object? state)
     {

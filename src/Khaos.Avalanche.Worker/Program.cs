@@ -1,7 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-using Khaos.Avalanche.Remoting;
+using Khaos.Avalanche.Hosting;
 using Khaos.Avalanche.Worker;
 using Khaos.Avalanche.Worker.Watchers;
 

@@ -1,6 +1,6 @@
 using Khaos.Avalanche.Watchers;
 
-namespace Khaos.Avalanche.Remoting;
+namespace Khaos.Avalanche.Hosting;
 
 public interface IJob
 {

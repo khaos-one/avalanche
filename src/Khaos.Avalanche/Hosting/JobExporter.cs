@@ -1,9 +1,8 @@
 using System.Net.Http.Json;
-using System.Reflection;
 
 using Lokad.ILPack;
 
-namespace Khaos.Avalanche.Remoting;
+namespace Khaos.Avalanche.Hosting;
 
 public class JobExporter
 {
@@ -21,7 +20,7 @@ public class JobExporter
 
         var bytes = assemblyGenerator.GenerateAssemblyBytes(jobAssembly);
 
-        var request = new SerializedJobStartInfo(bytes, jobType.FullName);
+        var request = new SerializedJobStartInfo(bytes, jobType.FullName!);
 
         var httpClient = new HttpClient();
         var response = await httpClient.PostAsJsonAsync(_baseUrl + "/jobs", request);
