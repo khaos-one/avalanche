@@ -1,3 +1,5 @@
+using Khaos.Avalanche.Watchers;
+
 namespace Khaos.Avalanche.Hosting.CommandLine;
 
 public class CommandLineJobsHost : IDisposable
@@ -113,6 +115,48 @@ public class CommandLineJobsHost : IDisposable
                                 await Console.Out.WriteLineAsync($"Exception: {e.Message}");
                             }
                         }
+                        
+                        break;
+                    
+                    case "get":
+                        if (parts.Length > 1)
+                        {
+                            var id = Guid.Parse(parts[1]);
+
+                            try
+                            {
+                                var jobInfo = _jobsHost.GetJobInfo(id);
+
+                                await Console.Out.WriteLineAsync(
+                                    $"{jobInfo.Id}\t{jobInfo.Status.TypeName}\t{jobInfo.Status.Status.ToString()}");
+
+                                if (jobInfo.Watchers is not null)
+                                {
+                                    await Console.Out.WriteLineAsync("Counters:");
+                                    
+                                    foreach (var watcher in jobInfo.Watchers)
+                                    {
+                                        if (watcher is ISimpleCounter counter)
+                                        {
+                                            await Console.Out.WriteLineAsync($"\t{counter.Name}\t{counter.Value}");
+                                        }
+                                    }
+                                }
+
+                                if (jobInfo.Status.Exception is not null)
+                                {
+                                    await Console.Out.WriteLineAsync("Exception:");
+
+                                    await Console.Out.WriteLineAsync($"\t{jobInfo.Status.Exception.Type}");
+                                    await Console.Out.WriteLineAsync($"\t{jobInfo.Status.Exception.Message}");
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                await Console.Out.WriteLineAsync($"Exception: {e.Message}");
+                            }
+                        }
+
                         break;
                 }
             }

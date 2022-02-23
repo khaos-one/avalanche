@@ -1,6 +1,6 @@
 namespace Khaos.Avalanche.Watchers;
 
-public class SimpleCounter<T> : IWatcher<T>
+public class SimpleCounter<T> : IWatcher<T>, ISimpleCounter
 {
     public string Name { get; }
     public ulong Value { get; private set; }

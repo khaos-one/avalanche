@@ -1,6 +1,8 @@
 using System.Reflection;
 using System.Runtime.Loader;
 
+using Khaos.Avalanche.Watchers;
+
 namespace Khaos.Avalanche.Hosting;
 
 internal class JobHandle : IDisposable
@@ -113,4 +115,6 @@ internal class JobHandle : IDisposable
             return new(TypeName, _task.Status, ExceptionInfo.FromException(_task.Exception));
         }
     }
+
+    public IWatcher[] Watchers => Instance.GetWatchers().ToArray();
 }

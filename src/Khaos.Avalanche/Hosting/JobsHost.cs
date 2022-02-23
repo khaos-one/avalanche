@@ -57,6 +57,26 @@ public class JobsHost : IDisposable
             .Concat(_jobsCompleted.Select(kv => (kv.Key, kv.Value)))
             .ToImmutableDictionary(kv => kv.Key, kv => kv.Item2);
 
+    public JobInfo GetJobInfo(Guid jobId)
+    {
+        if (_jobsReadyToStart.TryGetValue(jobId, out var job1))
+        {
+            return new JobInfo(jobId, new JobStatus(job1.EntryType, TaskStatus.WaitingToRun, null), null);
+        }
+
+        if (_jobsRunning.TryGetValue(jobId, out var job2))
+        {
+            return new JobInfo(jobId, job2.Status, job2.Watchers);
+        }
+
+        if (_jobsCompleted.TryGetValue(jobId, out var job3))
+        {
+            return new JobInfo(jobId, job3, null);
+        }
+
+        throw new Exception("Failed to get job with specified ID.");
+    }
+
     private void OnJobCompleted(JobHandle job)
     {
         if (!_jobsRunning.TryRemove(job.Id, out _))
