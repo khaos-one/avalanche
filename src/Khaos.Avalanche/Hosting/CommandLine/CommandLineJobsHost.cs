@@ -158,6 +158,22 @@ public class CommandLineJobsHost : IDisposable
                         }
 
                         break;
+                    
+                    case "cancel":
+                        if (parts.Length > 1)
+                        {
+                            try
+                            {
+                                var id = Guid.Parse(parts[1]);
+
+                                _jobsHost.Cancel(id);
+                            }
+                            catch (Exception e)
+                            {
+                                await Console.Out.WriteLineAsync($"Exception: {e.Message}");
+                            }
+                        }
+                        break;
                 }
             }
         }

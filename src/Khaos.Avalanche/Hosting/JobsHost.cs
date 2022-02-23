@@ -77,6 +77,16 @@ public class JobsHost : IDisposable
         throw new Exception("Failed to get job with specified ID.");
     }
 
+    public void Cancel(Guid jobId)
+    {
+        if (_jobsRunning.TryGetValue(jobId, out var job))
+        {
+            job.Cancel();
+        }
+
+        throw new Exception("Failed to get job with specified ID.");
+    }
+
     private void OnJobCompleted(JobHandle job)
     {
         if (!_jobsRunning.TryRemove(job.Id, out _))

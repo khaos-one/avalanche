@@ -75,6 +75,11 @@ internal class JobHandle : IDisposable
         _onCompletedTask = _task.ContinueWith(task => Completed(this), linkedTokenSource.Token);
     }
 
+    public void Cancel()
+    {
+        _cancellationTokenSource.Cancel();
+    }
+
     public void Dispose()
     {
         if (_isDisposed)
