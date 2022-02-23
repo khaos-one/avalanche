@@ -1,3 +1,3 @@
 namespace Khaos.Avalanche.Hosting;
 
-public record JobStatus(TaskStatus Status, ExceptionInfo? Exception);
+public record JobStatus(string TypeName, TaskStatus Status, ExceptionInfo? Exception);

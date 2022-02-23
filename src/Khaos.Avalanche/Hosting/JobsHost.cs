@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using System.Collections.Immutable;
 
 namespace Khaos.Avalanche.Hosting;
 
@@ -27,7 +28,7 @@ public class JobsHost : IDisposable
         return jobId;
     }
 
-    public void Run(Guid jobId)
+    public void BeginJob(Guid jobId)
     {
         if (_isDisposed)
         {
@@ -49,6 +50,12 @@ public class JobsHost : IDisposable
 
         jobHandle.Begin();
     }
+
+    public IReadOnlyDictionary<Guid, JobStatus> GetAllJobs() =>
+        _jobsReadyToStart.Select(kv => (kv.Key, new JobStatus(kv.Value.EntryType, TaskStatus.WaitingToRun, null)))
+            .Concat(_jobsRunning.Select(kv => (kv.Key, kv.Value.Status)))
+            .Concat(_jobsCompleted.Select(kv => (kv.Key, kv.Value)))
+            .ToImmutableDictionary(kv => kv.Key, kv => kv.Item2);
 
     private void OnJobCompleted(JobHandle job)
     {

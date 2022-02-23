@@ -6,6 +6,7 @@ namespace Khaos.Avalanche.Hosting;
 internal class JobHandle : IDisposable
 {
     public Guid Id { get; }
+    public string TypeName { get; }
     public IJob Instance { get; }
 
     private readonly Assembly _assembly;
@@ -14,14 +15,16 @@ internal class JobHandle : IDisposable
 
     private bool _isStarted;
     private bool _isDisposed;
-    private Task _task;
+    private Task? _task;
+    private Task? _onCompletedTask;
     
     public event Action<JobHandle> Completed;
 
     public JobHandle(Guid id, SerializedJobStartInfo startInfo)
     {
         Id = id;
-        
+
+        TypeName = startInfo.EntryType;
         _assemblyLoadContext = new AssemblyLoadContext($"jobs-{Id}", isCollectible: true);
 
         using var ms = new MemoryStream(startInfo.Assembly);
@@ -66,8 +69,8 @@ internal class JobHandle : IDisposable
         var linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(selfToken, cancellationToken);
 
         _isStarted = true;
-        _task = Task.Run(() => Instance.Run(linkedTokenSource.Token), linkedTokenSource.Token)
-            .ContinueWith(task => Completed(this), linkedTokenSource.Token);
+        _task = Task.Run(() => Instance.Run(linkedTokenSource.Token), linkedTokenSource.Token);
+        _onCompletedTask = _task.ContinueWith(task => Completed(this), linkedTokenSource.Token);
     }
 
     public void Dispose()
@@ -76,7 +79,7 @@ internal class JobHandle : IDisposable
         {
             throw new InvalidOperationException("Cannot dispose already disposed object.");
         }
-
+        
         _cancellationTokenSource.Cancel();
 
         if (_isStarted)
@@ -92,8 +95,8 @@ internal class JobHandle : IDisposable
             }
         }
 
-        _assemblyLoadContext.Unload();
         _isDisposed = true;
+        _assemblyLoadContext.Unload();
 
         GC.SuppressFinalize(this);
     }
@@ -104,10 +107,10 @@ internal class JobHandle : IDisposable
         {
             if (!_isStarted)
             {
-                return new(TaskStatus.WaitingToRun, null);
+                return new(TypeName, TaskStatus.WaitingToRun, null);
             }
 
-            return new(_task.Status, ExceptionInfo.FromException(_task.Exception));
+            return new(TypeName, _task.Status, ExceptionInfo.FromException(_task.Exception));
         }
     }
 }
