@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Khaos.Avalanche\Khaos.Avalanche.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="bigquery.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Remove="missing_features.csv" />
+    </ItemGroup>
+
+</Project>
