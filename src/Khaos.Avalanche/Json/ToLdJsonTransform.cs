@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace Khaos.Avalanche.LdJson;
+namespace Khaos.Avalanche.Json;
 
 public class ToLdJsonTransform<T> : ITransform<T, string>
 {
