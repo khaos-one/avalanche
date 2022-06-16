@@ -13,6 +13,17 @@ public static class AsyncEnumerableExtensions
         }
     }
 
+    public static async IAsyncEnumerable<T> Flatten<T>(this IAsyncEnumerable<IAsyncEnumerable<T>> enumerable)
+    {
+        await foreach (var sequence in enumerable)
+        {
+            await foreach (var element in sequence)
+            {
+                yield return element;
+            }
+        }
+    }
+
     public static async IAsyncEnumerable<TOut> Aggregate<TIn, TOut>(
         this IAsyncEnumerable<TIn> source,
         TOut seed,
