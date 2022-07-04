@@ -2,13 +2,13 @@ using System.Text;
 
 namespace Khaos.Avalanche;
 
-public class LocalFileTextSink : ISink<string>
+public class LocalFileTextLinesSink : ISink<string>
 {
     private readonly string _path;
 
     private IAsyncEnumerable<string>? _enumerable;
 
-    public LocalFileTextSink(string path)
+    public LocalFileTextLinesSink(string path)
     {
         _path = path;
     }

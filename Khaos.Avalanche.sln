@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Khaos.Avalanche.GoogleCloud
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Khaos.Avalanche.Cassandra", "src\Khaos.Avalanche.Cassandra\Khaos.Avalanche.Cassandra.csproj", "{81A6C2C7-7F0F-4659-9B29-A93100E60540}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Khaos.Avalanche.RabbitMq", "src\Khaos.Avalanche.RabbitMq\Khaos.Avalanche.RabbitMq.csproj", "{5DA8A9C9-E122-41ED-A5B6-2823D2378266}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,5 +56,9 @@ Global
 		{81A6C2C7-7F0F-4659-9B29-A93100E60540}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81A6C2C7-7F0F-4659-9B29-A93100E60540}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81A6C2C7-7F0F-4659-9B29-A93100E60540}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DA8A9C9-E122-41ED-A5B6-2823D2378266}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DA8A9C9-E122-41ED-A5B6-2823D2378266}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DA8A9C9-E122-41ED-A5B6-2823D2378266}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DA8A9C9-E122-41ED-A5B6-2823D2378266}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
