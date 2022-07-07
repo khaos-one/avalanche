@@ -1,5 +1,8 @@
-sandbox/
+out/
 bin/
 obj/
 .idea/
 bigquery.json
+*.secret.*
+*.nupkg
+sandbox/
